@@ -11,8 +11,12 @@ interface TimerSMStateView {
     // transitions
     void toRunningState();
     void toStoppedState();
+
     void toLapRunningState();
     void toLapStoppedState();
+    void toWaitingState();
+    void toBeepingState();
+
 
     // actions
     void actionInit();
@@ -26,4 +30,6 @@ interface TimerSMStateView {
     // state-dependent UI updates
     void updateUIRuntime();
     void updateUILaptime();
+    int getRuntime();
+
 }

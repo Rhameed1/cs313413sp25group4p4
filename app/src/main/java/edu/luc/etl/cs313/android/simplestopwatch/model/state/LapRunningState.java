@@ -2,13 +2,16 @@ package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 
-class LapRunningState implements StopwatchState {
+class LapRunningState implements TimerState
+ {
 
-    public LapRunningState(final StopwatchSMStateView sm) {
+     public LapRunningState(final TimerSMStateView sm)
+     {
         this.sm = sm;
     }
 
-    private final StopwatchSMStateView sm;
+     private final TimerSMStateView sm;
+
 
     @Override
     public void onStartStop() {

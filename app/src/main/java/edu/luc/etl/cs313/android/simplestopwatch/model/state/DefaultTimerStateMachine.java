@@ -16,6 +16,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         this.clockModel = clockModel;
     }
 
+
     private final TimeModel timeModel;
 
     private final ClockModel clockModel;
@@ -52,12 +53,18 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimerState RUNNING     = new RunningState(this);
     private final TimerState LAP_RUNNING = new LapRunningState(this);
     private final TimerState LAP_STOPPED = new LapStoppedState(this);
+    private final TimerState WAITING = new WaitingState(this);
+    private final TimerState BEEPING = new BeepingState(this);
+
 
     // transitions
     @Override public void toRunningState()    { setState(RUNNING); }
     @Override public void toStoppedState()    { setState(STOPPED); }
     @Override public void toLapRunningState() { setState(LAP_RUNNING); }
     @Override public void toLapStoppedState() { setState(LAP_STOPPED); }
+    @Override public void toWaitingState() { setState(WAITING); }
+    @Override public void toBeepingState() { setState(BEEPING); }
+
 
     // actions
     @Override public void actionInit()       { toStoppedState(); actionReset(); }

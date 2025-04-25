@@ -12,8 +12,12 @@ class StoppedZeroState implements TimerState {
 
     @Override
     public void onStartStop() {
-        sm.actionStart();
-        sm.toRunningState();
+        if (sm.getRuntime() < 99) {
+            sm.actionInc();
+            sm.toWaitingState();
+        } else {
+            sm.toRunningState();
+        }
     }
 
     @Override
@@ -24,7 +28,7 @@ class StoppedZeroState implements TimerState {
 
     @Override
     public void onTick() {
-        throw new UnsupportedOperationException("onTick");
+        // Do nothing when timer is at zero and stopped
     }
 
     @Override
