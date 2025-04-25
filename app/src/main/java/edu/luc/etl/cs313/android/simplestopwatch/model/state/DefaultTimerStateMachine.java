@@ -9,9 +9,9 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  *
  * @author laufer
  */
-public class DefaultStopwatchStateMachine implements StopwatchStateMachine {
+public class DefaultTimerStateMachine implements TimerStateMachine {
 
-    public DefaultStopwatchStateMachine(final TimeModel timeModel, final ClockModel clockModel) {
+    public DefaultTimerStateMachine(final TimeModel timeModel, final ClockModel clockModel) {
         this.timeModel = timeModel;
         this.clockModel = clockModel;
     }
@@ -23,9 +23,9 @@ public class DefaultStopwatchStateMachine implements StopwatchStateMachine {
     /**
      * The internal state of this adapter component. Required for the State pattern.
      */
-    private StopwatchState state;
+    private TimerState state;
 
-    protected void setState(final StopwatchState state) {
+    protected void setState(final TimerState state) {
         this.state = state;
         listener.onStateUpdate(state.getId());
     }
@@ -48,10 +48,10 @@ public class DefaultStopwatchStateMachine implements StopwatchStateMachine {
     @Override public void updateUILaptime() { listener.onTimeUpdate(timeModel.getLaptime()); }
 
     // known states
-    private final StopwatchState STOPPED     = new StoppedState(this);
-    private final StopwatchState RUNNING     = new RunningState(this);
-    private final StopwatchState LAP_RUNNING = new LapRunningState(this);
-    private final StopwatchState LAP_STOPPED = new LapStoppedState(this);
+    private final TimerState STOPPED     = new StoppedZeroState(this);
+    private final TimerState RUNNING     = new RunningState(this);
+    private final TimerState LAP_RUNNING = new LapRunningState(this);
+    private final TimerState LAP_STOPPED = new LapStoppedState(this);
 
     // transitions
     @Override public void toRunningState()    { setState(RUNNING); }
