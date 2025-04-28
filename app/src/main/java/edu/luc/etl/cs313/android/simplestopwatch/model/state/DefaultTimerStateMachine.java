@@ -18,7 +18,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         this.timeModel = timeModel;
         this.clockModel = clockModel;
         this.appContext = context.getApplicationContext();
-        this.BEEPING = new BeepingState(this, appContext);
+        //this.BEEPING = new BeepingState(this, appContext); Fixed teh constant beeping that was happening
     }
 
 
@@ -62,7 +62,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     //private final TimerState LAP_RUNNING = new LapRunningState(this);
     //private final TimerState LAP_STOPPED = new LapStoppedState(this);
     private final TimerState WAITING = new WaitingState(this);
-    private TimerState BEEPING;
+    //private TimerState BEEPING;
 
 
     // transitions
@@ -71,7 +71,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     //@Override public void toLapRunningState() { setState(LAP_RUNNING); }
    //@Override public void toLapStoppedState() { setState(LAP_STOPPED); }
     @Override public void toWaitingState() { setState(WAITING); }
-    @Override public void toBeepingState() { setState(BEEPING); }
+    @Override public void toBeepingState() { setState(new BeepingState(this, appContext)); }
 
 
     // actions
