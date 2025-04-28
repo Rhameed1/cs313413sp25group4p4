@@ -29,6 +29,7 @@ public class StopwatchAdapter extends Activity implements StopwatchModelListener
     private StopwatchModelFacade model;
 
     protected void setModel(final StopwatchModelFacade model) {
+
         this.model = model;
     }
 
@@ -38,7 +39,7 @@ public class StopwatchAdapter extends Activity implements StopwatchModelListener
         // inject dependency on view so this adapter receives UI events
         setContentView(R.layout.activity_main);
         // inject dependency on model into this so model receives UI events
-        this.setModel(new ConcreteStopwatchModelFacade());
+        this.setModel(new ConcreteStopwatchModelFacade(this));
         // inject dependency on this into model to register for UI updates
         model.setModelListener(this);
     }
@@ -53,6 +54,11 @@ public class StopwatchAdapter extends Activity implements StopwatchModelListener
     protected void onStart() {
         super.onStart();
         model.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     // TODO remaining lifecycle methods
@@ -86,10 +92,13 @@ public class StopwatchAdapter extends Activity implements StopwatchModelListener
 
     // forward event listener methods to the model
     public void onStartStop(final View view) {
+
         model.onStartStop();
     }
 
     public void onLapReset(final View view)  {
+
         model.onLapReset();
     }
+
 }
