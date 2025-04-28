@@ -3,6 +3,7 @@ package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 import edu.luc.etl.cs313.android.simplestopwatch.common.StopwatchModelListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
+import android.content.Context;
 
 /**
  * An implementation of the state machine for the stopwatch.
@@ -11,15 +12,18 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  */
 public class DefaultTimerStateMachine implements TimerStateMachine {
 
-    public DefaultTimerStateMachine(final TimeModel timeModel, final ClockModel clockModel) {
+    public DefaultTimerStateMachine(final TimeModel timeModel, final ClockModel clockModel, final Context context) {
         this.timeModel = timeModel;
         this.clockModel = clockModel;
+        this.appContext = context.getApplicationContext();
     }
 
 
     private final TimeModel timeModel;
 
     private final ClockModel clockModel;
+
+    private final Context appContext;
 
     /**
      * The internal state of this adapter component. Required for the State pattern.
@@ -35,6 +39,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     @Override
     public void setModelListener(final StopwatchModelListener listener) {
+
         this.listener = listener;
     }
 
@@ -54,7 +59,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimerState LAP_RUNNING = new LapRunningState(this);
     private final TimerState LAP_STOPPED = new LapStoppedState(this);
     private final TimerState WAITING = new WaitingState(this);
-    private final TimerState BEEPING = new BeepingState(this);
+    private final TimerState BEEPING = new BeepingState(this, appContext);
 
 
     // transitions
@@ -74,4 +79,9 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public void actionLap()        { timeModel.setLaptime(); }
     @Override public void actionInc()        { timeModel.incRuntime(); actionUpdateView(); }
     @Override public void actionUpdateView() { state.updateView(); }
+
+    @Override
+    public int getRuntime() {
+        return timeModel.getRuntime();
+    }
 }
