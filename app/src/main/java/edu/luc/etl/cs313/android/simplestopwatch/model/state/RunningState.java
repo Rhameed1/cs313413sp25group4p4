@@ -16,16 +16,22 @@ class RunningState implements TimerState {
         sm.toStoppedState();
     }
 
-    @Override
-    public void onLapReset() {
+   // @Override
+    /*public void onLapReset() {
         sm.actionLap();
         sm.toLapRunningState();
-    }
+    }*/
 
     @Override
     public void onTick() {
-        sm.actionInc();
-        sm.toRunningState();
+        sm.actionDec();
+        if (sm.getRuntime() <= 0) {
+            sm.toBeepingState();
+    }else {
+            sm.updateUIRuntime();
+        }
+
+       // sm.toRunningState();
     }
 
     @Override

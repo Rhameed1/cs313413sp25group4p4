@@ -63,12 +63,12 @@ class BeepingState implements TimerState {
         sm.toStoppedState();
     }
 
-    @Override
-    public void onLapReset() {
-        stopAlarm();
-        sm.actionReset();
-        sm.toStoppedState();
-    }
+    //@Override
+    //public void onLapReset() {
+       // stopAlarm();
+      //  sm.actionReset();
+       // sm.toStoppedState();
+   // }
 
     @Override
     public void onTick() {

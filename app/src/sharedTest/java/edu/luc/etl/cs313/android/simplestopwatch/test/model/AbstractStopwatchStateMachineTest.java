@@ -12,7 +12,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.common.StopwatchModelListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.TickListener;
-import edu.luc.etl.cs313.android.simplestopwatch.model.state.StopwatchStateMachine;
+import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerStateMachine;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
 /**
@@ -26,7 +26,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  */
 public abstract class AbstractStopwatchStateMachineTest {
 
-    private StopwatchStateMachine model;
+    private TimerStateMachine model;
 
     private UnifiedMockDependency dependency;
 
@@ -46,7 +46,7 @@ public abstract class AbstractStopwatchStateMachineTest {
      *
      * @param model
      */
-    protected void setModel(final StopwatchStateMachine model) {
+    protected void setModel(final TimerStateMachine model) {
         this.model = model;
         if (model == null)
             return;

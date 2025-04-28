@@ -20,11 +20,11 @@ class StoppedZeroState implements TimerState {
         }
     }
 
-    @Override
-    public void onLapReset() {
-        sm.actionReset();
-        sm.toStoppedState();
-    }
+    //@Override
+   // public void onLapReset() {
+      //  sm.actionReset();
+       // sm.toStoppedState();
+    //}
 
     @Override
     public void onTick() {
