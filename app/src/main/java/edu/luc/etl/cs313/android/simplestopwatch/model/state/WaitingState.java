@@ -49,6 +49,7 @@ class WaitingState implements TimerState {
         handler.postDelayed(() -> {
             long elapsed = System.currentTimeMillis() - lastPressTime;
             if (elapsed >= 3000 || sm.getRuntime() == 99) {
+                sm.actionStart();
                 sm.toRunningState();
             } else {
                 scheduleTimeoutCheck();
